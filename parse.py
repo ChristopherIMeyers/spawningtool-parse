@@ -34,4 +34,4 @@ def filesToJson(names):
 files = ['./data/'+f for f in os.listdir('./data/') if os.path.isfile('./data/'+f)]
 print "{0} files found".format(len(files))
 jsonArray = filesToJson(files)
-print "{0} files parsed".format(len(jsonArray))
+print "{0} files loaded".format(len(jsonArray))

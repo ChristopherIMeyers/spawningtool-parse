@@ -72,3 +72,8 @@ dataSets = map(jsonToData, jsonArray)
 print "{0} json objects converted".format(len(dataSets))
 
 flattened = [item for sublist in dataSets for item in sublist]
+flatString = map((lambda x: "{0},{1}".format(x[0],x[1])),flattened)
+f = file("out.csv", "w")
+f.write("\n".join(flatString))
+f.close()
+

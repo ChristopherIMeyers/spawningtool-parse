@@ -59,7 +59,16 @@ def jsonToData(json):
   bothSupply = zip(protossSupply, zergSupply)
   return [(supply[0][1],supply[1][1], 1 if winner == zerg else 0) for supply in bothSupply]
 
+def median(data):
+  if data == []:
+    return None
+  return sorted(data)[int(len(data)/2)]
 
+def getRange(data, starti, endi):
+  filtered = filter(lambda x: x[0] >= starti and x[0] < endi, data)
+  filteredZ = map(lambda x: x[1], filter(lambda x: x[2] == 0, filtered))
+  filteredP = map(lambda x: x[1], filter(lambda x: x[2] == 1, filtered))
+  return "{0}, {1}".format(median(filteredZ), median(filteredP))
 
 
 
@@ -77,3 +86,13 @@ f = file("out.csv", "w")
 f.write("\n".join(flatString))
 f.close()
 
+supplySpread = 5
+supplyMin = 10
+supplyMax = 180
+supplyRanges = map(lambda x: (x * supplySpread, (x + 1) * supplySpread), range(supplyMin/supplySpread, supplyMax / supplySpread-1))
+
+computed = map(lambda x: "{0}, {1}".format(x[0], getRange(flattened, x[0], x[1])), supplyRanges)
+
+f = file("pvz.csv", "w")
+f.write("\n".join(computed))
+f.close()

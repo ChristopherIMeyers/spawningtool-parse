@@ -1,5 +1,5 @@
 data
-out.csv
+*.csv
 
 
 *.py[cod]

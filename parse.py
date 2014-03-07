@@ -57,7 +57,7 @@ def jsonToData(json):
   protossSupply = players[protoss]['supply']
   zergSupply = players[zerg]['supply']
   bothSupply = zip(protossSupply, zergSupply)
-  return [(supply[0][1],supply[1][1], 1 if winner == zerg else 0) for supply in bothSupply]
+  return [(supply[0][0], supply[0][1],supply[1][1], 1 if winner == zerg else 0) for supply in bothSupply]
 
 def median(data):
   if data == []:
@@ -81,7 +81,7 @@ dataSets = map(jsonToData, jsonArray)
 print "{0} json objects converted".format(len(dataSets))
 
 flattened = [item for sublist in dataSets for item in sublist]
-flatString = map((lambda x: "{0},{1},{2}".format(x[0], x[1], x[2])),flattened)
+flatString = map((lambda x: "{0},{1},{2},{3}".format(x[0], x[1], x[2], x[3])),flattened)
 f = file("out.csv", "w")
 f.write("\n".join(flatString))
 f.close()
@@ -96,3 +96,5 @@ computed = map(lambda x: "{0}, {1}".format(x[0], getRange(flattened, x[0], x[1])
 f = file("pvz.csv", "w")
 f.write("\n".join(computed))
 f.close()
+
+

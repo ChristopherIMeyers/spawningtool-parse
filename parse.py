@@ -86,6 +86,26 @@ f = file("out.csv", "w")
 f.write("\n".join(flatString))
 f.close()
 
+
+timeRange = map(lambda x: x*160, range(0,100))
+def getSetByTime(time):
+  return filter(lambda x: x[0] == time, flattened)
+
+flattenedByTime = map(lambda x: getSetByTime(x), timeRange)
+
+def getMedianSupplyPair(timeSet):
+  zSupplies = map(lambda x: x[1], timeSet)
+  pSupplies = map(lambda x: x[2], timeSet)
+  return (median(zSupplies), median(pSupplies))
+
+medianByTime = map(getMedianSupplyPair, flattenedByTime)
+medianByTimeStrings = map(lambda x: ','.join(map(str, x)), medianByTime)
+
+
+f = file("medianByTime.csv", "w")
+f.write("\n".join(medianByTimeStrings))
+f.close()
+
 supplySpread = 5
 supplyMin = 10
 supplyMax = 180

@@ -87,7 +87,7 @@ f.write("\n".join(flatString))
 f.close()
 
 
-timeRange = map(lambda x: x*160, range(0,100))
+timeRange = map(lambda x: x*160, range(0,200))
 def getSetByTime(time):
   return filter(lambda x: x[0] == time, flattened)
 

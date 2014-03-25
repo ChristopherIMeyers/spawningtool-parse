@@ -153,9 +153,10 @@ function buildChart(data) {
     .attr('cy', function(d){return yScale(d.p);})
     .attr('r', 2);
 }
-  var dataSet = d3.csv('medianByTime.csv', function(data) {
-    buildChart(data);
-    buildTable(data);
-  });
+
+var dataSet = d3.csv('medianByTime.csv', function(data) {
+  buildChart(data);
+  buildTable(data);
+});
 
 </script>
